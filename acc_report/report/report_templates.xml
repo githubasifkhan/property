@@ -11,7 +11,7 @@
                                 <h3>Aged Payable/Receivable</h3>
                             </div>
                             <div class="row">
-                                <table class="table table-sm" name="account_lines_table" style="border-bottom:1px solid black;">
+                                <table class="table table-sm" name="account_lines_table" style="border-bottom:1px solid black;font-size:12px;">
                                     <thead>
                                         <tr>
                                             <th>
@@ -29,6 +29,11 @@
                                             <th>
                                                 <span>Order Booker</span>
                                             </th>
+                                            <th><span>User</span></th>
+                                            <th><span>Source</span></th>
+                                            <th><span>Vehicle No</span></th>
+                                            <th><span>Vehicle Qty</span></th>
+                                            <th><span>Technician Name</span></th>
                                             <th>
                                                 <span>EXP. Date</span>
                                             </th>
@@ -57,339 +62,491 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <t t-foreach="partners" t-as="partner">
-                                            <t t-if="partner">
-                                                <t t-set="current_invoices" t-value="docs.get_current_invoices(partner, 'current')"/>
-                                                <t t-set="oneto30" t-value="docs.get_current_invoices(partner, 'oneto30')"/>
-                                                <t t-set="tto60" t-value="docs.get_current_invoices(partner, 'tto60')"/>
-                                                <t t-set="tto90" t-value="docs.get_current_invoices(partner, 'tto90')"/>
-                                                <t t-set="tto120" t-value="docs.get_current_invoices(partner, 'tto120')"/>
-                                                <t t-set="older" t-value="docs.get_current_invoices(partner, 'older')"/>
-                                                <t t-set="total_current" t-value="0"/>
-                                                <t t-set="total_oneto30" t-value="0"/>
-                                                <t t-set="total_tto60" t-value="0"/>
-                                                <t t-set="total_tto90" t-value="0"/>
-                                                <t t-set="total_tto120" t-value="0"/>
-                                                <t t-set="total_older" t-value="0"/>
-                                                <!--                                                <t t-set="total_current" t-value="0"/>-->
-                                                <t t-if="current_invoices or oneto30 or tto60 or tto120 or older">
-                                                    <tr style="font-weight:bold; background-color:#d4d4d4;">
-                                                        <td style="text-align:left;" colspan="12">
-                                                            <t t-esc="partner.name"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
+                                        <!--                                        <t t-foreach="partners" t-as="partner">-->
+                                        <!--                                            <t t-if="partner">-->
+                                        <!--                                                <t t-set="current_invoices" t-value="docs.get_current_invoices(partner, 'current')"/>-->
+                                        <!--                                                <t t-set="oneto30" t-value="docs.get_current_invoices(partner, 'oneto30')"/>-->
+                                        <!--                                                <t t-set="tto60" t-value="docs.get_current_invoices(partner, 'tto60')"/>-->
+                                        <!--                                                <t t-set="tto90" t-value="docs.get_current_invoices(partner, 'tto90')"/>-->
+                                        <!--                                                <t t-set="tto120" t-value="docs.get_current_invoices(partner, 'tto120')"/>-->
+                                        <!--                                                <t t-set="older" t-value="docs.get_current_invoices(partner, 'older')"/>-->
+                                        <t t-set="total_current" t-value="0"/>
+                                        <t t-set="total_oneto30" t-value="0"/>
+                                        <t t-set="total_tto60" t-value="0"/>
+                                        <t t-set="total_tto90" t-value="0"/>
+                                        <t t-set="total_tto120" t-value="0"/>
+                                        <t t-set="total_older" t-value="0"/>
+                                        <!--                                                <t t-set="total_current" t-value="0"/>-->
+                                        <!--                                                <t t-if="current_invoices or oneto30 or tto60 or tto120 or older">-->
+                                        <!--                                                    <tr style="font-weight:bold; background-color:#d4d4d4;">-->
+                                        <!--                                                        <td style="text-align:left;" colspan="18">-->
+                                        <!--                                                            <t t-esc="partner.name"/>-->
+                                        <!--                                                        </td>-->
+                                        <!--                                                    </tr>-->
+                                        <!--                                                </t>-->
 
-                                                <t t-foreach="current_invoices" t-as="o">
-                                                    <t t-if="current_invoices">
-                                                        <tr>
-                                                            <td style="text-align:left;">
-                                                                <!--                                                            <t t-esc="o['partner_id']['name']"/>-->
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['date']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['journal_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['date_maturity']"/>
-                                                            </td>
-                                                            <t t-set="total_current" t-value="total_current + o['move_id']['amount_total']"/>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['amount_total']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="sum([o.move_id.amount_total for o in current_invoices])"/>
-                                                            </td>
-                                                        </tr>
-                                                    </t>
-                                                </t>
-
-                                                <t t-foreach="oneto30" t-as="o">
-                                                    <t t-if="oneto30">
-                                                        <tr>
-                                                            <td style="text-align:left;">
-                                                                <!--                                                                <t t-esc="o['partner_id']['name']"/>-->
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['date']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['journal_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['date_maturity']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <t t-set="total_oneto30" t-value="total_oneto30 + o['move_id']['amount_total']"/>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['amount_total']"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="0"/>
-                                                            </td>
-                                                            <td style="text-align:left;">
-                                                                <t t-esc="sum([o.move_id.amount_total for o in oneto30])"/>
-                                                            </td>
-                                                        </tr>
-                                                    </t>
-                                                </t>
-                                            </t>
-
-                                            <t t-foreach="tto60" t-as="o">
-                                                <t t-if="tto60">
-                                                    <tr>
-                                                        <td style="text-align:left;">
-                                                            <!--                                                            <t t-esc="o['partner_id']['name']"/>-->
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['journal_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date_maturity']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <t t-set="total_tto60" t-value="total_tto60 + o['move_id']['amount_total']"/>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['move_id']['amount_total']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="sum([o.move_id.amount_total for o in tto60])"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-                                            </t>
-
-                                            <t t-foreach="tto90" t-as="o">
-                                                <t t-if="tto90">
-                                                    <tr>
-                                                        <td style="text-align:left;">
-                                                            <!--                                                            <t t-esc="o['partner_id']['name']"/>-->
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['journal_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date_maturity']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <t t-set="total_tto90" t-value="total_tto90 + o['move_id']['amount_total']"/>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['move_id']['amount_total']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="sum([o.move_id.amount_total for o in tto90])"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-                                            </t>
-
-                                            <t t-foreach="tto120" t-as="o">
-                                                <t t-if="tto120">
-                                                    <tr>
-                                                        <td style="text-align:left;">
-                                                            <!--                                                            <t t-esc="o['partner_id']['name']"/>-->
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['journal_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date_maturity']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <t t-set="total_tto120" t-value="total_tto120 + o['move_id']['amount_total']"/>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['move_id']['amount_total']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="sum([o.move_id.amount_total for o in tto120])"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-                                            </t>
-
-                                            <t t-foreach="older" t-as="o">
-                                                <t t-if="older">
-                                                    <tr>
-                                                        <td style="text-align:left;">
-                                                            <!--                                                            <t t-esc="o['partner_id']['name']"/>-->
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['journal_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['account_id']['user_type_id']['name']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                                <t t-esc="o['move_id']['order_booker_id']['name']"/>
-                                                            </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['date_maturity']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="0"/>
-                                                        </td>
-                                                        <t t-set="total_older" t-value="total_older + o['move_id']['amount_total']"/>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="o['move_id']['amount_total']"/>
-                                                        </td>
-                                                        <td style="text-align:left;">
-                                                            <t t-esc="sum([o.move_id.amount_total for o in older])"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-                                                </t>
-                                            <t t-if="total_current or total_tto30 or total_tto60 or total_tto120 or total_tto90 or total_older">
+                                        <t t-foreach="current_invoices" t-as="cur">
+                                            <t t-if="current_invoices">
                                                 <tr>
-                                                    <td colspan="6" style="text-align:left;font-weight:bold;">
-                                                        <span>Total</span>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['partner_id']['name']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_current"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['date']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_oneto30"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['journal_id']['name']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_tto60"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['account_id']['user_type_id']['name']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_tto90"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['move_id']['order_booker_id']['name']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_tto120"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['move_id']['invoice_user_id']['name']"/>
                                                     </td>
-                                                    <td style="text-align:left;font-weight:bold;">
-                                                        <t t-esc="total_older"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['move_id']['invoice_origin']"/>
                                                     </td>
-
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['date_maturity']"/>
+                                                    </td>
+                                                    <t t-set="total_current" t-value="total_current + o['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="cur['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in current_invoices])"/>
+                                                    </td>
                                                 </tr>
                                             </t>
-
                                         </t>
+
+                                        <t t-foreach="oneto30" t-as="one">
+                                            <t t-if="oneto30">
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['partner_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['date']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['journal_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['account_id']['user_type_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['move_id']['order_booker_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['move_id']['invoice_user_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['move_id']['invoice_origin']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['date_maturity']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <t t-set="total_oneto30" t-value="total_oneto30 + one['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="one['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in oneto30])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <!--                                            </t>-->
+
+                                        <t t-foreach="tto60" t-as="six">
+                                            <t t-if="tto60">
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['partner_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['date']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['journal_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['account_id']['user_type_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['move_id']['order_booker_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['move_id']['invoice_user_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['move_id']['invoice_origin']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['date_maturity']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <t t-set="total_tto60" t-value="total_tto60 + six['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="six['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in tto60])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+
+                                        <t t-foreach="tto90" t-as="nine">
+                                            <t t-if="tto90">
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                                                                                    <t t-esc="nine['partner_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['date']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['journal_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['account_id']['user_type_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['move_id']['order_booker_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['move_id']['invoice_user_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['move_id']['invoice_origin']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['date_maturity']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <t t-set="total_tto90" t-value="total_tto90 + nine['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="nine['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in tto90])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <t t-foreach="tto120" t-as="onetwen">
+                                            <t t-if="tto120">
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                                                                                    <t t-esc="onetwen['partner_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['date']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['journal_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['account_id']['user_type_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['move_id']['order_booker_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['move_id']['invoice_user_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['move_id']['invoice_origin']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['date_maturity']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <t t-set="total_tto120" t-value="total_tto120 + onetwen['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="onetwen['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in tto120])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <t t-foreach="older" t-as="old">
+                                            <t t-if="older">
+                                                <tr>
+                                                    <td style="text-align:left;">
+                                                                                                                    <t t-esc="old['partner_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['date']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['journal_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['account_id']['user_type_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['move_id']['order_booker_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['move_id']['invoice_user_id']['name']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['move_id']['invoice_origin']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="vehicle_ids"
+                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['vehicle_number_ids'])"/>
+                                                        <t t-esc="vehicle_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-set="tech_ids"
+                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['technician_ids'])"/>
+                                                        <t t-esc="tech_ids"/>
+<!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
+                                                    </td>
+<!--                                                    <td style="text-align:left;">-->
+<!--                                                        <t t-esc="old['move_id']['vehicle_number_ids']['name']"/>-->
+<!--                                                    </td>-->
+<!--                                                    <td style="text-align:left;">-->
+<!--                                                        <t t-esc="old['move_id']['technician_ids']['name']"/>-->
+<!--                                                    </td>-->
+<!--                                                    <td style="text-align:left;">-->
+<!--                                                        <t t-esc="old['move_id']['technician_ids']['name']"/>-->
+<!--                                                    </td>-->
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['date_maturity']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="0"/>
+                                                    </td>
+                                                    <t t-set="total_older" t-value="total_older + old['move_id']['amount_residual']"/>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="old['move_id']['amount_residual']"/>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <t t-esc="sum([o.move_id.amount_residual for o in older])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <t t-if="total_current or total_tto30 or total_tto60 or total_tto120 or total_tto90 or total_older">
+                                            <tr>
+                                                <td colspan="11" style="text-align:left;font-weight:bold;">
+                                                    <span>Total</span>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_current"/>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_oneto30"/>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_tto60"/>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_tto90"/>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_tto120"/>
+                                                </td>
+                                                <td style="text-align:left;font-weight:bold;">
+                                                    <t t-esc="total_older"/>
+                                                </td>
+                                                <td></td>
+
+                                            </tr>
+                                        </t>
+
+                                        <!--                                        </t>-->
                                     </tbody>
                                 </table>
                             </div>

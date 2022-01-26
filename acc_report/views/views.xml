@@ -5,9 +5,10 @@
         <field name="arch" type="xml">
         <form string="Report">
             <group class="oe_title">
-<!--                <field name="partner_id" domain="[('id', 'in', partner_ids)]"/>-->
+                <field name="partner_id" domain="[('id', 'in', partner_ids)]"/>
+<!--                <field name="partner_id"/>-->
                 <field name="account_type" widget="radio"/>
-<!--                <field name="partner_ids" widget="many2many_tags" invisible="1"/>-->
+                <field name="partner_ids" widget="many2many_tags" invisible="1"/>
             </group>
             <footer>
                 <button name="menu_report_action" string="Print" class="btn-primary" type="object"/>
