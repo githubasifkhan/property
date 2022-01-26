@@ -8,7 +8,7 @@
                         <div class="page">
                             <div class="oe_structure"/>
                             <div class="text-center">
-                                <h3>Aged Payable/Receivable</h3>
+                                <h3>Aged Pdf</h3>
                             </div>
                             <div class="row">
                                 <table class="table table-sm" name="account_lines_table" style="border-bottom:1px solid black;font-size:12px;">
@@ -130,7 +130,7 @@
                                                     <td style="text-align:left;">
                                                         <t t-esc="cur['date_maturity']"/>
                                                     </td>
-                                                    <t t-set="total_current" t-value="total_current + o['move_id']['amount_residual']"/>
+                                                    <t t-set="total_current" t-value="total_current + cur['move_id']['amount_residual']"/>
                                                     <td style="text-align:left;">
                                                         <t t-esc="cur['move_id']['amount_residual']"/>
                                                     </td>
