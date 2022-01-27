@@ -111,19 +111,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in cur['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in cur['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in cur['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in cur['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
@@ -182,19 +182,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in one['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in one['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in one['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in one['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
@@ -254,19 +254,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in six['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in six['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in six['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in six['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
@@ -325,19 +325,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in nine['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in nine['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in nine['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in nine['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
@@ -395,19 +395,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in onetwen['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in onetwen['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in onetwen['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in onetwen['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
@@ -465,19 +465,19 @@
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="vehicle_ids"
-                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['vehicle_number_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in old['move_id']['vehicle_number_ids'])"/>
                                                         <t t-esc="vehicle_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['vehicle_number_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in old['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
                                                     <td style="text-align:left;">
                                                         <t t-set="tech_ids"
-                                                                    t-value="', '.join(period.get('name') for period in old['move_id']['technician_ids'])"/>
+                                                                    t-value="', '.join(period['name'] for period in old['move_id']['technician_ids'])"/>
                                                         <t t-esc="tech_ids"/>
 <!--                                                        <t t-esc="cur['move_id']['technician_ids']['name']"/>-->
                                                     </td>
